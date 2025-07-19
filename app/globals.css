@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Utility class for hiding scrollbars (example) */
+.remove-scrollbar::-webkit-scrollbar {
+	display: none;
+}
+
+.remove-scrollbar {
+	-ms-overflow-style: none;
+	scrollbar-width: none;
+}
