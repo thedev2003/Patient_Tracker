@@ -1,9 +1,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-	images: {
-		domains: ['localhost'],
+	reactStrictMode: true,
+	experimental: {
+		appDir: true,
 	},
-	serverActions: true,
+	images: {
+		domains: [],
+	},
 };
 
 export default nextConfig;

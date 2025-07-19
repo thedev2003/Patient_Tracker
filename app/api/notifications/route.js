@@ -1,19 +1,23 @@
 import { dbConnect } from "@/lib/db";
 import Notification from "@/models/Notification";
 
-export async function GET() {
+export async function GET(req) {
 	await dbConnect();
-	const notifications = await Notification.find().sort({ createdAt: -1 });
+	const url = new URL(req.url, "http://localhost");
+	const patientId = url.searchParams.get("patient");
+	let query = {};
+	if (patientId) query.patient = patientId;
+	const notifications = await Notification.find(query).sort({ createdAt: -1 });
 	return Response.json({ notifications });
 }
 
 export async function POST(req) {
 	await dbConnect();
-	const { title, message } = await req.json();
+	const { title, message, patient } = await req.json();
 	if (!title || !message) {
 		return Response.json({ error: "Title and message required" }, { status: 400 });
 	}
-	const notification = await Notification.create({ title, message });
+	const notification = await Notification.create({ title, message, patient });
 	return Response.json({ notification });
 }
 
