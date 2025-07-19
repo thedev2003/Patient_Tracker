@@ -1,14 +1,21 @@
-export function GenderSelect({ error, ...props }) {
+"use client";
+export function GenderSelect({ name = "gender", label = "Gender", ...props }) {
 	return (
 		<div className="flex flex-col gap-1">
-			<label className="font-medium">Gender</label>
-			<select className={`border rounded px-3 py-2 ${error ? "border-red-500" : "border-gray-300"}`} {...props}>
-				<option value="">Select gender</option>
-				<option value="Male">Male</option>
-				<option value="Female">Female</option>
-				<option value="Other">Other</option>
+			<label htmlFor={name} className="font-medium text-gray-700">
+				{label}
+			</label>
+			<select
+				id={name}
+				name={name}
+				className="px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 text-gray-900"
+				{...props}
+			>
+				<option value="">Select...</option>
+				<option value="male">Male</option>
+				<option value="female">Female</option>
+				<option value="other">Other</option>
 			</select>
-			{error && <span className="text-sm text-red-500">{error}</span>}
 		</div>
 	);
 }
